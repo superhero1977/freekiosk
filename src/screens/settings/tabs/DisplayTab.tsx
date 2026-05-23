@@ -780,7 +780,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
                 
                 <SettingsSwitch
                   label="在返回界面"
-                  hint="在"外部应用运行中"界面显示状态栏"
+                  hint='在"外部应用运行中"界面显示状态栏'
                   value={statusBarOnReturn}
                   onValueChange={onStatusBarOnReturnChange}
                 />
