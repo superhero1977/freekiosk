@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">自由自助终端</string>
+    <string name="accessibility_service_description">FreeKiosk 使用此服务向本设备上运行的应用发送键盘输入和远程控制命令。这是 REST API 远程控制功能在外部应用模式下运行所必需的。</string>
+    <string name="boot_loading">正在启动自助终端…</string>
+</resources>
