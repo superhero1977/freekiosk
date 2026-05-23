@@ -1,0 +1,33 @@
+# 第三方库和资源文件
+android/app/src/main/assets/
+node_modules/
+__tests__/
+coverage/
+*.min.js
+*.min.js.map
+*.bundle.js
+*.bundle.js.map
+
+# 构建产物
+android/build/
+ios/build/
+dist/
+build/
+*.apk
+*.aab
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 日志
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
