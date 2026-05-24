@@ -345,7 +345,7 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
                     { backgroundColor: item.type === 'video' ? Colors.info : Colors.secondary }
                   ]}>
                     <Text style={styles.mediaItemTypeText}>
-                      {item.type === 'video' ? '🎥 Video' : '🖼️ Image'}
+                      {item.type === 'video' ? '🎥 视频' : '🖼️ 图片'}
                     </Text>
                   </View>
                   {item.isLocal && (
@@ -430,7 +430,7 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
             {mediaPlayerItems.length === 0 && (
               <SettingsInfoBox variant="warning">
                 <Text style={styles.infoText}>
-                  ⚠️ Add at least one media item to use the Media Player
+                  ⚠️ 请至少添加一个媒体项目以使用媒体播放器
                 </Text>
               </SettingsInfoBox>
             )}
@@ -559,9 +559,9 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
               {url.trim().toLowerCase().startsWith('http://') && (
                 <SettingsInfoBox variant="warning">
                   <Text style={styles.infoText}>
-                    ⚠️ SECURITY: This URL uses HTTP (unencrypted).{`
+                    ⚠️ 安全提示：此网址使用 HTTP（未加密）。{`
 `}
-                    Your data can be intercepted. Use HTTPS instead.
+                    您的数据可能被拦截。请改用 HTTPS。
                   </Text>
                 </SettingsInfoBox>
               )}
@@ -665,9 +665,9 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
             <>
               <SettingsInfoBox variant="info">
                 <Text style={styles.infoText}>
-                  📌 Scheduled events take priority over URL Rotation.{`
+                  📌 定时事件优先于网址轮播。{`
 `}
-                  One-time events take priority over recurring events.
+                  一次性事件优先于循环事件。
                 </Text>
               </SettingsInfoBox>
               
@@ -691,14 +691,14 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
           <SettingsSection title="应用模式" icon="apps">
             <SettingsModeSelector
               options={[
-                { value: 'single', label: 'Single App', icon: 'cellphone' },
-                { value: 'multi', label: 'Multi App', icon: 'view-grid', badge: 'BETA', badgeColor: Colors.warning },
+                { value: 'single', label: '单应用', icon: 'cellphone' },
+                { value: 'multi', label: '多应用', icon: 'view-grid', badge: 'BETA', badgeColor: Colors.warning },
               ]}
               value={externalAppMode}
               onValueChange={(value) => onExternalAppModeChange(value as 'single' | 'multi')}
               hint={externalAppMode === 'single'
-                ? 'Launch a single app in kiosk mode (classic behavior)'
-                : 'Display a home screen grid with multiple apps'}
+                ? '以自助终端模式启动单个应用（经典行为）'
+                : '显示包含多个应用的主屏幕网格'}
             />
           </SettingsSection>
           
@@ -727,13 +727,13 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
           {/* Multi App: managed apps grid */}
           {externalAppMode === 'multi' && (
             <SettingsSection title="应用列表" icon="view-grid">
-              <SettingsInfoBox variant="info">
-                <Text style={styles.infoText}>
-                  {'📱 Add apps to display on the home screen grid.\n'}
-                  {'Users can choose which app to launch.\n\n'}
-                  {'Toggle options per app: show on home screen, launch on boot, keep alive, accessibility.'}
-                </Text>
-              </SettingsInfoBox>
+            <SettingsInfoBox variant="info">
+              <Text style={styles.infoText}>
+                {'📱 添加要显示在主屏幕网格上的应用。\n'}
+                {'用户可以选择启动哪个应用。\n\n'}
+                {'每个应用可切换选项：显示在主屏幕、开机启动、保活、无障碍服务。'}
+              </Text>
+            </SettingsInfoBox>
               <ManagedAppsSection
                 managedApps={managedApps}
                 onManagedAppsChange={onManagedAppsChange}
@@ -745,12 +745,12 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
           {/* Managed Apps for Single App mode (optional, for background/accessibility features) */}
           {externalAppMode === 'single' && (
             <SettingsSection title="额外托管应用" icon="apps">
-              <SettingsInfoBox variant="info">
-                <Text style={styles.infoText}>
-                  {'📋 Optional: add extra apps for background monitoring, boot launch, or accessibility whitelist.\n'}
-                  {'These apps will NOT appear on the home screen in single app mode.'}
-                </Text>
-              </SettingsInfoBox>
+            <SettingsInfoBox variant="info">
+              <Text style={styles.infoText}>
+                {'📋 可选：添加用于后台监控、开机启动或无障碍服务白名单的额外应用。\n'}
+                {'这些应用不会在单应用模式下的主屏幕上显示。'}
+              </Text>
+            </SettingsInfoBox>
               <ManagedAppsSection
                 managedApps={managedApps}
                 onManagedAppsChange={onManagedAppsChange}
@@ -792,19 +792,19 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
             <View style={styles.permissionRow}>
               <View style={styles.permissionTextContainer}>
                 <Text style={[styles.permissionTitle, { color: hasUsageStatsPermission ? Colors.successDark : Colors.warningDark }]}>
-                  {hasUsageStatsPermission ? '✓ Usage Access Granted' : '⚠️ Usage Access Required'}
+                  {hasUsageStatsPermission ? '✓ 已授予使用情况访问权限' : '⚠️ 需要使用情况访问权限'}
                 </Text>
                 <Text style={styles.permissionHint}>
                   {hasUsageStatsPermission
-                    ? "Auto-relaunch monitoring is active. FreeKiosk can detect when the external app closes."
-                    : "Required for auto-relaunch. Without this, FreeKiosk cannot detect when the external app closes or crashes."}
+                    ? "自动重启监控已激活。FreeKiosk 可以检测外部应用何时关闭。"
+                    : "自动重启需要此权限。没有此权限，FreeKiosk 无法检测外部应用何时关闭或崩溃。"}
                 </Text>
               </View>
             </View>
             
             {!hasUsageStatsPermission && (
               <SettingsButton
-                title="Grant Usage Access"
+                title="授予使用情况访问权限"
                 variant="warning"
                 onPress={onRequestUsageStatsPermission}
               />
@@ -814,7 +814,7 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
       )}
       
       {/* Password Configuration */}
-      <SettingsSection title="Password" icon="pin">
+      <SettingsSection title="密码" icon="pin">
         <SettingsSwitch
           label="高级密码模式"
           hint="启用带特殊字符的字母数字密码。禁用则仅限数字 PIN 码（4-6位）。"
@@ -831,14 +831,14 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
           secureTextEntry
           maxLength={pinMode === 'alphanumeric' ? undefined : 6}
           autoCapitalize={pinMode === 'alphanumeric' ? 'none' : undefined}
-          error={pinModeChanged && !pin ? '⚠️ New password required after mode change' : undefined}
+          error={pinModeChanged && !pin ? '⚠️ 模式更改后需要输入新密码' : undefined}
           hint={pinModeChanged
-            ? '⚠️ Mode changed - You MUST enter a new password'
+            ? '⚠️ 模式已更改 - 您必须输入新密码'
             : isPinConfigured
-              ? '✓ Password configured - Leave empty to keep current password'
+              ? '✓ 密码已配置 - 留空以保持当前密码'
               : pinMode === 'alphanumeric'
-                ? 'Minimum 4 characters. Can include letters, numbers, and special characters.'
-                : 'Numeric PIN: 4-6 digits (default: 1234)'}
+                ? '最少 4 个字符。可包含字母、数字和特殊字符。'
+                : '数字 PIN：4-6 位（默认：1234）'}
         />
         
         <View style={styles.pinAttemptsContainer}>
@@ -857,7 +857,7 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
       
       {/* Inactivity Return to Home - WebView only */}
       {displayMode === 'webview' && (
-        <SettingsSection title="Inactivity Return" icon="timer-sand">
+        <SettingsSection title="无操作返回" icon="timer-sand">
           <SettingsSwitch
             label="无操作返回起始页"
             value={inactivityReturnEnabled}
@@ -913,7 +913,7 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
       
       {/* Auto Reload - WebView only */}
       {displayMode === 'webview' && (
-        <SettingsSection title="Auto Reload" icon="refresh">
+        <SettingsSection title="自动重新加载" icon="refresh">
           <SettingsSwitch
             label="出错时重新加载"
             hint="网络错误时自动重新加载页面"
@@ -925,7 +925,7 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
       
       {/* PDF Viewer - WebView only */}
       {displayMode === 'webview' && (
-        <SettingsSection title="PDF Viewer" icon="file-pdf-box">
+        <SettingsSection title="PDF 查看器" icon="file-pdf-box">
           <SettingsSwitch
             label="内联 PDF 查看器"
             hint="在浏览器中直接显示 PDF 文件而不是下载"
@@ -975,9 +975,9 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
           {printEnabled && (
             <SettingsInfoBox variant="info">
               <Text style={styles.infoText}>
-                {'🖨️ Web pages can trigger the Android print dialog via window.print().\n\n'}
-                {'In Device Owner (kiosk) mode, the system print spooler is automatically whitelisted to allow the print dialog to appear.\n\n'}
-                {'Supports WiFi, Bluetooth, USB printers, and Save as PDF.'}
+                {'🖨️ 网页可以通过 window.print() 触发 Android 打印对话框。\n\n'}
+                {'在设备所有者（kiosk）模式下，系统打印队列会自动列入白名单以允许显示打印对话框。\n\n'}
+                {'支持 WiFi、蓝牙、USB 打印机和另存为 PDF。'}
               </Text>
             </SettingsInfoBox>
           )}
@@ -1025,7 +1025,7 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
               />
               
               <SettingsButton
-                title="Reset to Default Position"
+                title="重置为默认位置"
                 icon="restore"
                 variant="outline"
                 onPress={onResetWebViewBackButtonPosition}
@@ -1037,11 +1037,11 @@ const GeneralTab: React.FC<GeneralTabProps> = ({
       
       {/* Background Apps - WebView mode only */}
       {displayMode === 'webview' && (
-        <SettingsSection title="Background Apps" icon="apps">
+        <SettingsSection title="后台应用" icon="apps">
           <SettingsInfoBox variant="info">
             <Text style={styles.infoText}>
-              {'📋 Optional: add apps to launch and keep running in the background while the kiosk WebView is displayed.\n\n'}
-              {'Example: keep a music or audio receiver app alive alongside your web dashboard.'}
+              {'📋 可选：添加在自助终端 WebView 显示时在后台运行的应用。\n\n'}
+              {'例如：让音乐或音频接收应用与您的网页仪表盘一起保持运行。'}
             </Text>
           </SettingsInfoBox>
           <ManagedAppsSection

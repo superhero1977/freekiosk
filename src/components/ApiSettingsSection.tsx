@@ -184,7 +184,7 @@ export const ApiSettingsSection: React.FC<ApiSettingsSectionProps> = ({
 
   const copyToClipboard = (text: string, label: string) => {
     Clipboard.setString(text);
-    Alert.alert('Copied', `${label} copied to clipboard`);
+    Alert.alert('已复制', `${label} 已复制到剪贴板`);
   };
 
   const getApiUrl = () => {
@@ -214,7 +214,7 @@ export const ApiSettingsSection: React.FC<ApiSettingsSectionProps> = ({
                 { backgroundColor: serverRunning ? '#4CAF50' : '#F44336' }
               ]} />
               <Text style={styles.statusText}>
-                {isLoading ? 'Starting...' : serverRunning ? 'Server Running' : 'Server Stopped'}
+                {isLoading ? '启动中...' : serverRunning ? '服务器运行中' : '服务器已停止'}
               </Text>
               {isLoading && <ActivityIndicator size="small" color="#007AFF" style={styles.loader} />}
             </View>
@@ -303,7 +303,7 @@ export const ApiSettingsSection: React.FC<ApiSettingsSectionProps> = ({
 
             {allowControl && (
               <View style={styles.endpointCategory}>
-                <Text style={styles.categoryLabel}>POST (Control)</Text>
+                <Text style={styles.categoryLabel}>POST（控制）</Text>
                 <Text style={styles.endpoint}>/api/brightness - Set brightness</Text>
                 <Text style={styles.endpoint}>/api/screen/on - Turn screen on</Text>
                 <Text style={styles.endpoint}>/api/screen/off - Turn screen off</Text>
@@ -345,7 +345,7 @@ export const ApiSettingsSection: React.FC<ApiSettingsSectionProps> = ({
           <View style={styles.hintContainer}>
             <Icon name="home-assistant" size={20} color="#41BDF5" />
             <Text style={styles.hintText}>
-              Use with Home Assistant's RESTful integration. See documentation for configuration examples.
+              与 Home Assistant 的 RESTful 集成配合使用。请参阅文档了解配置示例。
             </Text>
           </View>
         </>

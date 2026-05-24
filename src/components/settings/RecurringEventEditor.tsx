@@ -79,7 +79,7 @@ const RecurringEventEditor: React.FC<RecurringEventEditorProps> = ({
 
   const validate = (): string | null => {
     if (!name.trim()) {
-      return 'Please enter an event name';
+      return '请输入事件名称';
     }
     if (!url.trim()) {
       return '请输入网址';
@@ -88,13 +88,13 @@ const RecurringEventEditor: React.FC<RecurringEventEditorProps> = ({
       return '请至少选择一天';
     }
     if (!isValidTime(startTime)) {
-      return 'Please enter a valid start time (HH:MM)';
+      return '请输入有效的开始时间（HH:MM）';
     }
     if (!isValidTime(endTime)) {
-      return 'Please enter a valid end time (HH:MM)';
+      return '请输入有效的结束时间（HH:MM）';
     }
     if (startTime >= endTime) {
-      return 'End time must be after start time';
+      return '结束时间必须晚于开始时间';
     }
     return null;
   };
@@ -136,13 +136,13 @@ const RecurringEventEditor: React.FC<RecurringEventEditorProps> = ({
       >
         <View style={styles.header}>
           <TouchableOpacity onPress={onCancel} style={styles.headerButton}>
-            <Text style={styles.cancelText}>Cancel</Text>
+            <Text style={styles.cancelText}>取消</Text>
           </TouchableOpacity>
           <Text style={styles.headerTitle}>
-            {event ? 'Edit Recurring Event' : 'New Recurring Event'}
+            {event ? '编辑重复事件' : '新建重复事件'}
           </Text>
           <TouchableOpacity onPress={handleSave} style={styles.headerButton}>
-            <Text style={styles.saveText}>Save</Text>
+            <Text style={styles.saveText}>保存</Text>
           </TouchableOpacity>
         </View>
 
@@ -169,7 +169,7 @@ const RecurringEventEditor: React.FC<RecurringEventEditorProps> = ({
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>📅 Schedule</Text>
+            <Text style={styles.sectionTitle}>📅 计划</Text>
             
             <DaySelector
               selectedDays={days}
@@ -192,9 +192,9 @@ const RecurringEventEditor: React.FC<RecurringEventEditorProps> = ({
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>⚙️ Options</Text>
+            <Text style={styles.sectionTitle}>⚙️ 选项</Text>
             
-            <Text style={styles.label}>Priority (for overlapping events)</Text>
+            <Text style={styles.label}>优先级（用于重叠事件）</Text>
             <View style={styles.priorityRow}>
               {PRIORITY_LEVELS.map(level => (
                 <TouchableOpacity
@@ -224,7 +224,7 @@ const RecurringEventEditor: React.FC<RecurringEventEditorProps> = ({
               style={styles.enabledRow}
               onPress={() => setEnabled(!enabled)}
             >
-              <Text style={styles.label}>Event Enabled</Text>
+              <Text style={styles.label}>事件已启用</Text>
               <Text style={styles.enabledIcon}>{enabled ? '✅' : '⬜'}</Text>
             </TouchableOpacity>
           </View>

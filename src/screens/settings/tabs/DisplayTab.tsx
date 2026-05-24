@@ -215,7 +215,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
   // Generate camera options from available cameras (deduplicated by position)
   const uniquePositions = Array.from(new Set(availableCameras.map(cam => cam.position)));
   const cameraOptions = uniquePositions.map(position => ({
-    label: position === 'front' ? 'Front Camera' : 'Back Camera',
+    label: position === 'front' ? '前置摄像头' : '后置摄像头',
     value: position,
   }));
 
@@ -394,9 +394,9 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
                 <Text style={styles.subSectionTitle}>屏保样式</Text>
                 <SettingsRadioGroup
                   options={[
-                    { label: '仅调暗（默认）', value: 'dim', hint: 'Just dim the brightness (current behavior)' },
-                    { label: 'Web Page', value: 'url', hint: 'Show a web page (clock, dashboard, HTML)' },
-                    { label: '视频 / 图片', value: 'video', hint: 'Play a video or image slideshow' },
+                    { label: '仅调暗（默认）', value: 'dim', hint: '仅调暗亮度（当前行为）' },
+                    { label: '网页', value: 'url', hint: '显示网页（时钟、仪表盘、HTML）' },
+                    { label: '视频 / 图片', value: 'video', hint: '播放视频或图片幻灯片' },
                   ]}
                   value={screensaverType}
                   onValueChange={(v) => onScreensaverTypeChange(v as 'dim' | 'url' | 'video')}
@@ -418,7 +418,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
                         return (
                           <SettingsInfoBox variant="error">
                             <Text style={styles.infoText}>
-                              ⚠️ Invalid URL. Enter a full URL starting with https:// or http://
+                              ⚠️ 无效的网址。请输入以 https:// 或 http:// 开头的完整网址
                             </Text>
                           </SettingsInfoBox>
                         );
@@ -481,7 +481,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
                 {(screensaverType === 'url' || screensaverType === 'video') && screensaverBrightness < 0.1 && brightnessManagementEnabled && (
                   <SettingsInfoBox variant="warning">
                     <Text style={styles.infoText}>
-                      ⚠️ Screensaver Brightness is below 10%. Raise it (see slider below) so the content is visible, or switch to Dim Only.
+                      ⚠️ 屏保亮度低于 10%。请调高（见下方滑块）使内容可见，或切换为仅调暗模式。
                     </Text>
                   </SettingsInfoBox>
                 )}
@@ -502,7 +502,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
                     presets={[
                       { label: '黑屏', value: 0 },
                       { label: '非常暗（5%）', value: 0.05 },
-                      { label: 'Dim (10%)', value: 0.1 },
+                      { label: '暗（10%）', value: 0.1 },
                     ]}
                   />
                 </View>
@@ -561,7 +561,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
                     {availableCameras.length === 1 && (
                       <SettingsInfoBox variant="info">
                         <Text style={styles.infoText}>
-                          📹 Using {availableCameras[0].position === 'front' ? 'Front' : 'Back'} Camera (only camera available)
+                          📹 使用{availableCameras[0].position === 'front' ? '前置' : '后置'}摄像头（唯一可用的摄像头）
                         </Text>
                       </SettingsInfoBox>
                     )}
@@ -579,7 +579,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
                         {!selectedCameraAvailable && (
                           <SettingsInfoBox variant="warning">
                             <Text style={styles.infoText}>
-                              ⚠️ Selected camera not available on this device
+                              ⚠️ 所选摄像头在此设备上不可用
                             </Text>
                           </SettingsInfoBox>
                         )}
@@ -592,19 +592,19 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
               
               {/* How it works */}
               <View style={styles.subSection}>
-                <Text style={styles.infoTitle}>ℹ️ How It Works</Text>
+                <Text style={styles.infoTitle}>ℹ️ 工作原理</Text>
                 <Text style={styles.infoText}>
-                  • After {inactivityDelay || '10'} minute(s) without interaction, the screensaver activates{`
+                  • 屏保在无操作 {inactivityDelay || '10'} 分钟后激活{`
 `}
                   {displayMode === 'external_app'
-                    ? `• FreeKiosk comes to the foreground to show the screensaver; the external app resumes on wake
+                    ? `• FreeKiosk 进入前台显示屏保；外部应用在唤醒时恢复
 `
                     : ''}
-                  • Touch the screen to wake the device{`
+                  • 触摸屏幕唤醒设备{`
 `}
-                  {motionEnabled && `• Motion in front of the camera also wakes the screen
+                  {motionEnabled && `• 摄像头前的运动也会唤醒屏幕
 `}
-                  • Normal brightness is restored automatically
+                  • 亮度会自动恢复正常
                 </Text>
               </View>
             </>
@@ -625,11 +625,11 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
           <>
             {/* Schedule Rules List */}
             <View style={styles.subSection}>
-              <Text style={styles.subSectionTitle}>Schedule Rules</Text>
+              <Text style={styles.subSectionTitle}>计划规则</Text>
               {screenSchedulerRules.length === 0 ? (
                 <SettingsInfoBox variant="info">
                   <Text style={styles.infoText}>
-                    No rules configured yet. Add a rule to define when the screen should turn off.
+                    尚未配置规则。添加规则以定义屏幕何时应关闭。
                   </Text>
                 </SettingsInfoBox>
               ) : (
@@ -648,12 +648,12 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
                       onEdit={onEditScheduleRule}
                       onDelete={(id) => {
                         Alert.alert(
-                          'Delete Rule',
-                          'Are you sure you want to delete this schedule rule?',
+                          '删除规则',
+                          '确定要删除此计划规则吗？',
                           [
-                            { text: 'Cancel', style: 'cancel' },
+                            { text: '取消', style: 'cancel' },
                             {
-                              text: 'Delete',
+                              text: '删除',
                               style: 'destructive',
                               onPress: () => {
                                 onScreenSchedulerRulesChange(
@@ -686,7 +686,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
               {!screenSchedulerWakeOnTouch && (
                 <SettingsInfoBox variant="warning">
                   <Text style={styles.infoText}>
-                    ⚠️ Touch will not wake the screen during sleep periods. Use the scheduled wake time or REST API to turn screen back on.
+                    ⚠️ 休眠期间触摸无法唤醒屏幕。使用计划的唤醒时间或 REST API 来重新打开屏幕。
                   </Text>
                 </SettingsInfoBox>
               )}
@@ -694,7 +694,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
             
             {/* How it works */}
             <View style={styles.subSection}>
-              <Text style={styles.infoTitle}>ℹ️ How Screen Schedule Works</Text>
+              <Text style={styles.infoTitle}>ℹ️ 屏幕计划工作原理</Text>
               <Text style={styles.infoText}>
                 • Screen turns OFF automatically at the scheduled sleep time{`\n`}
                 • Screen turns ON automatically at the scheduled wake time{`\n`}
@@ -727,16 +727,16 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
           <View style={styles.subSection}>
             <SettingsInfoBox variant="info">
               <Text style={styles.infoText}>
-                📐 Layout: Items positioned left and right to avoid center camera area
+                📐 布局：项目位于左右两侧以避开中心摄像头区域
               </Text>
             </SettingsInfoBox>
             
             {/* Customize Status Bar Items */}
-            <Text style={styles.subSectionTitle}>🎨 Customize Items</Text>
+            <Text style={styles.subSectionTitle}>🎨 自定义项目</Text>
             
             <View style={styles.itemsGrid}>
               <SettingsSwitch
-                label="🔋 Battery"
+                label="🔋 电池"
                 value={showBattery}
                 onValueChange={onShowBatteryChange}
               />
@@ -748,19 +748,19 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
               />
               
               <SettingsSwitch
-                label="📘 Bluetooth"
+                label="📘 蓝牙"
                 value={showBluetooth}
                 onValueChange={onShowBluetoothChange}
               />
               
               <SettingsSwitch
-                label="🔊 Volume"
+                label="🔊 音量"
                 value={showVolume}
                 onValueChange={onShowVolumeChange}
               />
               
               <SettingsSwitch
-                label="🕐 Time"
+                label="🕐 时间"
                 value={showTime}
                 onValueChange={onShowTimeChange}
               />
@@ -790,7 +790,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
             {(displayMode === 'webview' || displayMode === 'media_player') && (
               <SettingsInfoBox variant="info">
                 <Text style={styles.infoText}>
-                  {displayMode === 'webview' ? 'WebView' : 'Media Player'} mode: Status bar appears above the web content
+                  {displayMode === 'webview' ? 'WebView' : '媒体播放器'} 模式：状态栏显示在网页内容上方
                 </Text>
               </SettingsInfoBox>
             )}
@@ -838,7 +838,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
         <SettingsSection title="用户代理" icon="web">
           <SettingsInput
             label="自定义 User Agent"
-            hint={customUserAgent.trim() ? 'Custom UA active. Clear the field to use the default.' : 'Leave empty to use the default modern Chrome User Agent. Some hosting providers (e.g. SiteGround) block old or suspicious User Agents.'}
+            hint={customUserAgent.trim() ? '自定义 UA 已激活。清除此字段以使用默认值。' : '留空以使用默认的现代 Chrome 用户代理字符串。某些托管服务商（例如 SiteGround）会阻止旧版或可疑的用户代理。'}
             value={customUserAgent}
             onChangeText={onCustomUserAgentChange}
             placeholder="Mozilla/5.0 (Linux; Android 13; ...) Chrome/131..."
@@ -848,7 +848,7 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
           {customUserAgent.trim() !== '' && (
             <SettingsInfoBox variant="warning">
               <Text style={styles.infoText}>
-                ⚠️ 自定义 User Agent is active. Some sites may behave unexpectedly with non-standard UA strings.
+                ⚠️ 自定义 User Agent 已激活。某些网站可能在使用非标准 UA 字符串时出现异常行为。
               </Text>
             </SettingsInfoBox>
           )}
@@ -863,18 +863,18 @@ const DisplayTab: React.FC<DisplayTabProps> = ({
             options={[
               {
                 value: 'default',
-                label: 'Default',
-                hint: 'Respect website settings (recommended)',
+                label: '默认',
+                hint: '尊重网站设置（推荐）',
               },
               {
                 value: 'force_numeric',
                 label: '强制数字',
-                hint: 'All fields show numeric keyboard',
+                hint: '所有字段显示数字键盘',
               },
               {
                 value: 'smart',
                 label: '智能检测',
-                hint: 'Detect and convert numeric fields only',
+                hint: '仅检测并转换数字字段',
               },
             ]}
             value={keyboardMode}

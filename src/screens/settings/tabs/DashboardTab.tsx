@@ -17,9 +17,9 @@ interface DashboardTabProps {
 }
 
 const ICON_MODES = [
-  { value: 'favicon' as const, label: 'Favicon' },
-  { value: 'image' as const, label: 'Image URL' },
-  { value: 'letter' as const, label: 'Letter' },
+  { value: 'favicon' as const, label: '网站图标' },
+  { value: 'image' as const, label: '图片网址' },
+  { value: 'letter' as const, label: '字母' },
 ];
 
 const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => {
@@ -68,7 +68,7 @@ const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => 
 
   const handleSaveTile = async () => {
     if (!editLabel.trim()) {
-      Alert.alert('错误', 'Please enter a label');
+      Alert.alert('错误', '请输入标签');
       return;
     }
     if (!editUrl.trim()) {
@@ -85,7 +85,7 @@ const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => 
       if (finalUrl.includes('.')) {
         finalUrl = 'https://' + finalUrl;
       } else {
-        Alert.alert('Invalid URL', 'Please enter a valid URL');
+        Alert.alert('无效网址', '请输入有效的网址');
         return;
       }
     }
@@ -183,7 +183,7 @@ const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => 
 
   return (
     <View>
-      <SettingsSection title="Dashboard Tiles" icon="view-dashboard">
+      <SettingsSection title="仪表盘磁贴" icon="view-dashboard">
         {tiles.map((tile, index) => (
           <View key={tile.id} style={styles.tileRow}>
             {/* Reorder arrows */}
@@ -220,7 +220,7 @@ const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => 
         ))}
 
         <SettingsButton
-          title="Add Tile"
+          title="添加磁贴"
           icon="plus-circle-outline"
           variant="success"
           onPress={openAddEditor}
@@ -246,7 +246,7 @@ const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => 
           <View style={styles.editorSpacer} />
 
           {/* Icon mode selector */}
-          <Text style={styles.fieldLabel}>Icon Mode</Text>
+          <Text style={styles.fieldLabel}>图标模式</Text>
           <View style={styles.iconModeRow}>
             {ICON_MODES.map(mode => (
               <TouchableOpacity
@@ -273,7 +273,7 @@ const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => 
             <>
               <View style={styles.editorSpacer} />
               <SettingsInput
-                label="Image URL"
+                label="图片网址"
                 value={editIconValue}
                 onChangeText={setEditIconValue}
                 placeholder="https://example.com/icon.png"
@@ -285,7 +285,7 @@ const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => 
           {/* Preview */}
           {editLabel.trim() && (
             <View style={styles.previewRow}>
-              <Text style={styles.fieldLabel}>Preview</Text>
+              <Text style={styles.fieldLabel}>预览</Text>
               <View style={styles.previewContainer}>
                 {renderTilePreview({
                   id: 'preview',
@@ -303,13 +303,13 @@ const DashboardTab: React.FC<DashboardTabProps> = ({ dashboardModeEnabled }) => 
           <View style={styles.editorSpacer} />
           <View style={styles.editorActions}>
             <SettingsButton
-              title="Cancel"
+              title="取消"
               variant="outline"
               onPress={() => setShowEditor(false)}
             />
             <View style={{ width: Spacing.sm }} />
             <SettingsButton
-              title={editingTile ? 'Update' : 'Add'}
+              title={editingTile ? '更新' : '添加'}
               variant="success"
               onPress={handleSaveTile}
             />

@@ -91,29 +91,29 @@ const OneTimeEventEditor: React.FC<OneTimeEventEditorProps> = ({
 
   const validate = (): string | null => {
     if (!name.trim()) {
-      return 'Please enter an event name';
+      return '请输入事件名称';
     }
     if (!url.trim()) {
       return '请输入网址';
     }
     if (!isValidDate(startDate)) {
-      return 'Please enter a valid start date (YYYY-MM-DD)';
+      return '请输入有效的开始日期（YYYY-MM-DD）';
     }
     if (!isValidDate(endDate)) {
-      return 'Please enter a valid end date (YYYY-MM-DD)';
+      return '请输入有效的结束日期（YYYY-MM-DD）';
     }
     if (endDate < startDate) {
-      return 'End date cannot be before start date';
+      return '结束日期不能早于开始日期';
     }
     if (!allDay) {
       if (!isValidTime(startTime)) {
-        return 'Please enter a valid start time (HH:MM)';
+        return '请输入有效的开始时间（HH:MM）';
       }
       if (!isValidTime(endTime)) {
-        return 'Please enter a valid end time (HH:MM)';
+        return '请输入有效的结束时间（HH:MM）';
       }
       if (startDate === endDate && startTime >= endTime) {
-        return 'End time must be after start time for single-day events';
+        return '单日事件的结束时间必须晚于开始时间';
       }
     }
     return null;
@@ -122,7 +122,7 @@ const OneTimeEventEditor: React.FC<OneTimeEventEditorProps> = ({
   const handleSave = () => {
     const error = validate();
     if (error) {
-      Alert.alert('Validation Error', error);
+      Alert.alert('验证错误', error);
       return;
     }
 
@@ -198,17 +198,17 @@ const OneTimeEventEditor: React.FC<OneTimeEventEditorProps> = ({
           </View>
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>📅 Date Range</Text>
+            <Text style={styles.sectionTitle}>📅 日期范围</Text>
             
             <View style={styles.dateRow}>
               <DateInput
-                label="Start Date"
+                label="开始日期"
                 value={startDate}
                 onChange={setStartDate}
               />
               <View style={styles.dateSpacer} />
               <DateInput
-                label="End Date"
+                label="结束日期"
                 value={endDate}
                 onChange={setEndDate}
                 minDate={startDate}
@@ -218,7 +218,7 @@ const OneTimeEventEditor: React.FC<OneTimeEventEditorProps> = ({
             <View style={styles.spacer} />
 
             <SettingsSwitch
-              label="All Day"
+              label="全天"
               hint="事件全天有效"
               value={allDay}
               onValueChange={setAllDay}
@@ -227,13 +227,13 @@ const OneTimeEventEditor: React.FC<OneTimeEventEditorProps> = ({
             {!allDay && (
               <View style={styles.timeRow}>
                 <TimeInput
-                  label="Start Time"
+                  label="开始时间"
                   value={startTime}
                   onChange={setStartTime}
                 />
                 <View style={styles.timeSpacer} />
                 <TimeInput
-                  label="End Time"
+                  label="结束时间"
                   value={endTime}
                   onChange={setEndTime}
                 />
@@ -274,7 +274,7 @@ const OneTimeEventEditor: React.FC<OneTimeEventEditorProps> = ({
               style={styles.enabledRow}
               onPress={() => setEnabled(!enabled)}
             >
-              <Text style={styles.label}>Event Enabled</Text>
+              <Text style={styles.label}>事件已启用</Text>
               <Text style={styles.enabledIcon}>{enabled ? '✅' : '⬜'}</Text>
             </TouchableOpacity>
           </View>

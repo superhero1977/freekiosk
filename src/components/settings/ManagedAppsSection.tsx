@@ -71,12 +71,12 @@ const ManagedAppsSection: React.FC<ManagedAppsSectionProps> = ({
   const handleRemoveApp = useCallback((packageName: string) => {
     const app = managedApps.find(a => a.packageName === packageName);
     Alert.alert(
-      'Remove App',
-      `Remove "${app?.displayName || packageName}" from managed apps?`,
+      '移除应用',
+      `从托管应用中移除"${app?.displayName || packageName}"？`,
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: '取消', style: 'cancel' },
         {
-          text: 'Remove',
+          text: '移除',
           style: 'destructive',
           onPress: () => {
             onManagedAppsChange(managedApps.filter(a => a.packageName !== packageName));
@@ -168,7 +168,7 @@ const ManagedAppsSection: React.FC<ManagedAppsSectionProps> = ({
       <View style={styles.sectionInfo}>
         <Icon name="information-outline" size={16} color={Colors.info} style={{ marginRight: 6 }} />
         <Text style={styles.sectionInfoText}>
-          Add apps to manage in multi-app mode. These apps will be whitelisted in lock task mode.
+          添加应用以在多应用模式下管理。这些应用将在锁定任务模式中被列入白名单。
         </Text>
       </View>
 
@@ -196,10 +196,8 @@ const ManagedAppsSection: React.FC<ManagedAppsSectionProps> = ({
         ) : (
           <>
             <Icon name="plus-circle-outline" size={20} color={Colors.textOnPrimary} style={{ marginRight: 8 }} />
-            <Text style={styles.addButtonText}>Add Managed App</Text>
+            <Text style={styles.addButtonText}>添加托管应用</Text>
           </>
-        )}
-      </TouchableOpacity>
 
       {/* App picker modal */}
       <Modal
@@ -211,7 +209,7 @@ const ManagedAppsSection: React.FC<ManagedAppsSectionProps> = ({
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Select an Application</Text>
+              <Text style={styles.modalTitle}>选择应用</Text>
               <TouchableOpacity onPress={() => setShowAppPicker(false)}>
                 <Icon name="close" size={24} color={Colors.textPrimary} />
               </TouchableOpacity>
@@ -263,7 +261,7 @@ const ManagedAppsSection: React.FC<ManagedAppsSectionProps> = ({
               ListEmptyComponent={
                 <View style={styles.emptyState}>
                   <Text style={styles.emptyText}>
-                    {loadingApps ? 'Loading...' : 'All installed apps are already managed'}
+                    {loadingApps ? '加载中...' : '所有已安装的应用都已被托管'}
                   </Text>
                 </View>
               }

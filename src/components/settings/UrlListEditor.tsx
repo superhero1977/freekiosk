@@ -99,7 +99,7 @@ const UrlListEditor: React.FC<UrlListEditorProps> = ({
     
     // Check for duplicates
     if (urls.includes(normalized)) {
-      Alert.alert('Duplicate', '此网址已在列表中');
+      Alert.alert('重复', '此网址已在列表中');
       return;
     }
 
@@ -172,8 +172,8 @@ const UrlListEditor: React.FC<UrlListEditorProps> = ({
       ) : (
         <View style={styles.emptyState}>
           <Text style={styles.emptyStateIcon}>{patternMode ? '🔗' : '📋'}</Text>
-          <Text style={styles.emptyStateText}>{emptyTitle || 'No URLs added yet'}</Text>
-          <Text style={styles.emptyStateHint}>{emptyHint || 'Add URLs below to start rotation'}</Text>
+          <Text style={styles.emptyStateText}>{emptyTitle || '尚未添加网址'}</Text>
+          <Text style={styles.emptyStateHint}>{emptyHint || '在下方添加网址以开始轮播'}</Text>
         </View>
       )}
 
@@ -201,7 +201,7 @@ const UrlListEditor: React.FC<UrlListEditorProps> = ({
         </View>
         
         <Text style={styles.countText}>
-          {maxUrls > 0 ? `${urls.length} / ${maxUrls} ${patternMode ? 'patterns' : 'URLs'}` : `${urls.length} ${patternMode ? 'patterns' : 'URLs'}`}
+          {maxUrls > 0 ? `${urls.length} / ${maxUrls} ${patternMode ? '个模式' : '个网址'}` : `${urls.length} ${patternMode ? '个模式' : '个网址'}`}
         </Text>
       </View>
     </View>

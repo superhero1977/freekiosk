@@ -70,14 +70,14 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
       const result = await exportBackup();
       if (result.success) {
         Alert.alert(
-          '✅ Backup Created',
-          `Configuration exported successfully!\n\nFile saved to:\n${result.filePath}`,
+          '✅ 备份已创建',
+          `配置已成功导出！\n\n文件保存至：\n${result.filePath}`,
           [{ text: '确定' }]
         );
       } else {
         Alert.alert(
-          '❌ Export Failed',
-          result.error || 'Unknown error occurred',
+          '❌ 导出失败',
+          result.error || '发生未知错误',
           [{ text: '确定' }]
         );
       }
@@ -141,22 +141,22 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
 
     Alert.alert(
       '⚠️ 恢复配置',
-      `This will replace all current settings with the backup from "${browsedFileName}".\n\nAre you sure you want to continue?`,
+      `这将用"${browsedFileName}"的备份替换所有当前设置。\n\n确定要继续吗？`,
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: '取消', style: 'cancel' },
         {
-          text: 'Restore',
+          text: '恢复',
           style: 'destructive',
           onPress: async () => {
             setIsRestoring(true);
             try {
               const result = await importBackupFromContent(browsedContent, browsedFileName || undefined);
               if (result.success) {
-                let message = 'Configuration restored successfully!';
+                let message = '配置已成功恢复！';
                 if (result.warning) {
                   message += `\n\n${result.warning}`;
                 }
-                message += '\n\nPlease restart the app for all changes to take effect.';
+                message += '\n\n请重启应用以使所有更改生效。';
 
                 Alert.alert('✅ Restore Complete', message, [
                   {
@@ -173,8 +173,8 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
                 ]);
               } else {
                 Alert.alert(
-                  '❌ Restore Failed',
-                  result.error || 'Unknown error occurred',
+                  '❌ 恢复失败',
+                  result.error || '发生未知错误',
                   [{ text: '确定' }]
                 );
               }
@@ -254,7 +254,7 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
               }
               await loadBackupFiles();
             } else {
-              Alert.alert('错误', result.error || 'Failed to delete backup');
+              Alert.alert('错误', result.error || '删除备份失败');
             }
           },
         },
@@ -336,7 +336,7 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
           ) : (
             <>
               <Icon name="upload" size={18} color={Colors.textOnPrimary} />
-              <Text style={styles.actionButtonText}>Export</Text>
+              <Text style={styles.actionButtonText}>导出</Text>
             </>
           )}
         </TouchableOpacity>
@@ -390,7 +390,7 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
               <View style={styles.browsedFileIndicator}>
                 <Icon name="file-document-outline" size={18} color={Colors.success} />
                 <Text style={styles.browsedFileText} numberOfLines={1}>
-                  Selected: {browsedFileName}
+                  已选择：{browsedFileName}
                 </Text>
                 <TouchableOpacity
                   onPress={() => {
@@ -415,10 +415,10 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
               ) : backupFiles.length === 0 ? (
                 <View style={styles.emptyContainer}>
                   <Icon name="calendar" size={48} color={Colors.textHint} />
-                  <Text style={styles.emptyText}>No backups found</Text>
+                  <Text style={styles.emptyText}>未找到备份</Text>
                   <Text style={styles.emptySubtext}>
-                    Only backups created by this app are listed here.{'\n'}
-                    Use "Browse device" above to import backups from other devices or pushed via ADB.
+                    仅列出此应用创建的备份。{'\n'}
+                    使用上方的"浏览设备"从其他设备或通过 ADB 推送导入备份。
                   </Text>
                 </View>
               ) : (
@@ -444,7 +444,7 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
                         <Text style={styles.previewValue}>{backupPreview.appVersion || 'Unknown'}</Text>
                       </View>
                       <View style={styles.previewRow}>
-                        <Text style={styles.previewLabel}>Export Date:</Text>
+                        <Text style={styles.previewLabel}>导出日期：</Text>
                         <Text style={styles.previewValue}>{formatDate(backupPreview.exportDate)}</Text>
                       </View>
                       <View style={styles.previewRow}>
@@ -482,7 +482,7 @@ const BackupRestoreSection: React.FC<BackupRestoreSectionProps> = ({
                   ) : (
                     <>
                       <Icon name="refresh" size={18} color={Colors.textOnPrimary} />
-                      <Text style={styles.restoreButtonText}>Restore This Backup</Text>
+                      <Text style={styles.restoreButtonText}>恢复此备份</Text>
                     </>
                   )}
                 </TouchableOpacity>

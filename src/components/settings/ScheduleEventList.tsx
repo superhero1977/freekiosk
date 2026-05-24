@@ -75,7 +75,7 @@ const ScheduleEventList: React.FC<ScheduleEventListProps> = ({
       {events.length > 0 && (
         <View style={styles.statsRow}>
           <Text style={styles.statsText}>
-            {activeCount} active • {recurringCount} recurring • {oneTimeCount} one-time
+            {activeCount} 个激活 • {recurringCount} 个重复 • {oneTimeCount} 个一次性
           </Text>
         </View>
       )}
@@ -83,9 +83,9 @@ const ScheduleEventList: React.FC<ScheduleEventListProps> = ({
       {sortedEvents.length === 0 ? (
         <View style={styles.emptyState}>
           <Icon name="calendar" size={40} color={Colors.textHint} style={styles.emptyIcon} />
-          <Text style={styles.emptyTitle}>No Scheduled Events</Text>
+          <Text style={styles.emptyTitle}>没有计划事件</Text>
           <Text style={styles.emptyText}>
-            Add recurring or one-time events to display{'\n'}different URLs at specific times.
+            添加重复或一次性事件以在不同{'\n'}时间显示不同的网址。
           </Text>
         </View>
       ) : (
@@ -138,7 +138,7 @@ const ScheduleEventList: React.FC<ScheduleEventListProps> = ({
 
       {!canAddMore && (
         <Text style={styles.limitText}>
-          Maximum {maxEvents} events reached
+          已达到最大 {maxEvents} 个事件的限制
         </Text>
       )}
     </View>

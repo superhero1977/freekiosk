@@ -103,7 +103,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
       // (temporarily exits lock task before launching the settings intent)
       await KioskModule.openAndroidSettings('accessibility');
     } catch (e: any) {
-      Alert.alert('错误', 'Could not open Accessibility Settings');
+      Alert.alert('错误', '无法打开无障碍设置');
     }
   };
 
@@ -112,18 +112,18 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
       await AccessibilityModule.enableViaDeviceOwner();
       // Re-check status after enabling
       setTimeout(checkAccessibilityStatus, 1000);
-      Alert.alert('成功', 'Accessibility Service has been enabled automatically via Device Owner.');
+      Alert.alert('成功', '无障碍服务已通过设备所有者自动启用。');
     } catch (e: any) {
       if (e.code === 'WRITE_SECURE_SETTINGS_REQUIRED') {
         Alert.alert(
           '需要权限',
-          'To auto-enable the Accessibility Service, the WRITE_SECURE_SETTINGS permission must be granted via ADB (one-time setup):\n\n' +
+          '要自动启用无障碍服务，必须通过 ADB 授予 WRITE_SECURE_SETTINGS 权限（一次性设置）：\n\n' +
           'adb shell pm grant com.freekiosk android.permission.WRITE_SECURE_SETTINGS\n\n' +
-          'Alternatively, tap "Open Accessibility Settings" below to enable it manually.',
+          '或者，点击下方"打开无障碍设置"手动启用。',
           [{ text: '确定' }],
         );
       } else {
-        Alert.alert('错误', e.message || 'Failed to enable via Device Owner');
+        Alert.alert('错误', e.message || '通过设备所有者启用失败');
       }
     }
   };
@@ -162,7 +162,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
         </View>
         
         <SettingsButton
-          title={checkingUpdate ? 'Checking...' : downloading ? 'Downloading...' : 'Check for Updates'}
+          title={checkingUpdate ? '检查中...' : downloading ? '下载中...' : '检查更新'}
           icon={checkingUpdate ? 'timer-sand' : downloading ? 'download' : 'magnify'}
           variant="primary"
           onPress={onCheckForUpdates}
@@ -172,7 +172,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
         
         {updateAvailable && updateInfo && (
           <SettingsButton
-            title={downloading ? 'Downloading...' : 'Download & Install'}
+            title={downloading ? '下载中...' : '下载并安装'}
             icon="download"
             variant="success"
             onPress={onDownloadUpdate}
@@ -182,7 +182,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
         )}
         
         <Text style={styles.hint}>
-          {isDeviceOwner ? 'Device Owner mode: Manual updates via GitHub.' : 'Download and install updates from GitHub.'}
+          {isDeviceOwner ? '设备所有者模式：从 GitHub 手动更新。' : '从 GitHub 下载并安装更新。'}
         </Text>
       </SettingsSection>
       )}
@@ -196,7 +196,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
           
           {certificates.length === 0 ? (
             <View style={styles.emptyState}>
-              <Text style={styles.emptyStateText}>No certificates accepted</Text>
+              <Text style={styles.emptyStateText}>未接受任何证书</Text>
             </View>
           ) : (
             <View style={styles.certificatesList}>
@@ -235,9 +235,9 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
 
       {/* Accessibility Service - Hidden in Play Store builds (BIND_ACCESSIBILITY_SERVICE policy) */}
       {enableSelfUpdate && (
-      <SettingsSection title="Accessibility Service" icon="keyboard-outline">
+      <SettingsSection title="无障碍服务" icon="keyboard-outline">
         <View style={styles.accessibilityStatusRow}>
-          <Text style={styles.accessibilityStatusLabel}>Status</Text>
+          <Text style={styles.accessibilityStatusLabel}>状态</Text>
           <View style={[
             styles.accessibilityStatusBadge,
             { backgroundColor: accessibilityRunning ? Colors.successLight : accessibilityEnabled ? Colors.warningLight : Colors.errorLight },
@@ -246,15 +246,15 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
               styles.accessibilityStatusText,
               { color: accessibilityRunning ? Colors.successDark : accessibilityEnabled ? Colors.warningDark : Colors.errorDark },
             ]}>
-              {accessibilityRunning ? '● Active' : accessibilityEnabled ? '● Enabled (not connected)' : '○ Disabled'}
+              {accessibilityRunning ? '● 运行中' : accessibilityEnabled ? '● 已启用（未连接）' : '○ 已禁用'}
             </Text>
           </View>
         </View>
 
-        <SettingsInfoBox variant="info" title="ℹ️ Why is this needed?">
+        <SettingsInfoBox variant="info" title="ℹ️ 为什么需要此权限？">
           <Text style={styles.infoText}>
-            The Accessibility Service allows FreeKiosk to send keyboard input (remote control, text input) to external apps.{'\n\n'}
-            Without it, keyboard emulation only works inside FreeKiosk's own WebView.
+            无障碍服务允许 FreeKiosk 发送键盘输入（遥控器、文本输入）到外部应用。{'\n\n'}
+            没有它，键盘模拟仅在 FreeKiosk 自己的 WebView 内工作。
           </Text>
         </SettingsInfoBox>
 
@@ -262,37 +262,37 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
           <>
             {isDeviceOwner ? (
               <SettingsButton
-                title="Enable Automatically (Device Owner)"
+                title="通过设备所有者自动启用"
                 icon="shield-check"
                 variant="primary"
                 onPress={handleEnableViaDeviceOwner}
               />
             ) : null}
             <SettingsButton
-              title="Open Accessibility Settings"
+              title="打开无障碍设置"
               icon="open-in-new"
               variant="primary"
               onPress={handleOpenAccessibilitySettings}
             />
             <Text style={styles.hint}>
               {isDeviceOwner
-                ? 'Device Owner mode can enable the service automatically if the WRITE_SECURE_SETTINGS permission has been granted via ADB. Otherwise, enable it manually in Android settings.'
-                : 'Enable "FreeKiosk" in Settings → Accessibility → Installed Services.'}
+                ? '如果已通过 ADB 授予 WRITE_SECURE_SETTINGS 权限，设备所有者模式可以自动启用该服务。否则，请在 Android 设置中手动启用。'
+                : '在设置 → 无障碍 → 已安装的服务中启用"FreeKiosk"。'}
             </Text>
           </>
         )}
 
         {accessibilityRunning && (
           <Text style={styles.hint}>
-            ✅ Keyboard emulation is available for all apps (WebView + External Apps).
+            ✅ 所有应用（WebView + 外部应用）的键盘模拟功能可用。
           </Text>
         )}
 
         {isDeviceOwner && displayMode === 'external_app' && (
-          <SettingsInfoBox variant="info" title="🔧 Managed Apps Accessibility">
+          <SettingsInfoBox variant="info" title="🔧 托管应用无障碍">
             <Text style={styles.infoText}>
-              You can allow other apps' accessibility services in the "Managed Apps" section of the General tab.{'\n'}
-              Toggle "允许无障碍服务" per app to whitelist their accessibility services via Device Owner.
+              您可以在"常规"标签页的"托管应用"部分允许其他应用的无障碍服务。{'\n'}
+              每个应用切换"允许无障碍服务"可通过设备所有者将其无障碍服务列入白名单。
             </Text>
           </SettingsInfoBox>
         )}
@@ -303,21 +303,21 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
       <BackupRestoreSection onRestoreComplete={onRestoreComplete} />
 
       {/* Android System Settings */}
-      <SettingsSection title="Android System Settings" icon="android">
+      <SettingsSection title="Android 系统设置" icon="android">
         <Text style={styles.hint}>
-          Open native Android settings to change WiFi, volume, display and more.
-          Useful when your device has no physical navigation buttons.
+          打开原生 Android 设置以更改 WiFi、音量、显示等。
+          当您的设备没有物理导航按钮时很有用。
         </Text>
         {kioskEnabled && (
-          <SettingsInfoBox variant="info" title="🔒 Kiosk Mode Active">
+          <SettingsInfoBox variant="info" title="🔒 自助终端模式已激活">
             <Text style={styles.infoText}>
-              Kiosk mode will be temporarily paused to open Android settings.{' '}
-              It will automatically re-engage when you return to FreeKiosk.
+              自助终端模式将暂时暂停以打开 Android 设置。{'}
+              返回 FreeKiosk 时它将自动重新激活。
             </Text>
           </SettingsInfoBox>
         )}
         <SettingsButton
-          title="Open Android Settings"
+          title="打开 Android 设置"
           icon="cog"
           variant="primary"
           onPress={() => KioskModule.openAndroidSettings(null)}
@@ -339,7 +339,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
             style={styles.shortcutButton}
             onPress={() => KioskModule.openAndroidSettings('display')}
           >
-            <Text style={styles.shortcutText}>🔆 Display</Text>
+            <Text style={styles.shortcutText}>🔆 显示</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.shortcutButton}
@@ -351,7 +351,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
             style={styles.shortcutButton}
             onPress={() => KioskModule.openAndroidSettings('date')}
           >
-            <Text style={styles.shortcutText}>📅 Date & Time</Text>
+            <Text style={styles.shortcutText}>📅 日期和时间</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.shortcutButton}
@@ -363,9 +363,9 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
       </SettingsSection>
 
       {/* Actions */}
-      <SettingsSection title="Actions" icon="cog-outline">
+      <SettingsSection title="操作" icon="cog-outline">
         <SettingsButton
-          title="Reset All Settings"
+          title="重置所有设置"
           icon="restart"
           variant="warning"
           onPress={onResetSettings}
@@ -373,7 +373,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
         
         {isDeviceOwner && (
           <SettingsButton
-            title="Remove Device Owner"
+            title="移除设备所有者"
             icon="alert"
             variant="danger"
             onPress={onRemoveDeviceOwner}
@@ -382,7 +382,7 @@ const AdvancedTab: React.FC<AdvancedTabProps> = ({
         
         {kioskEnabled && (
           <SettingsButton
-            title="Exit Kiosk Mode"
+            title="退出自助终端模式"
             icon="exit-to-app"
             variant="danger"
             onPress={onExitKioskMode}

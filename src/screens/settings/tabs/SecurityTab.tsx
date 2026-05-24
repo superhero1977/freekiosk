@@ -140,7 +140,7 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
         {kioskEnabled && (displayMode === 'webview' || displayMode === 'media_player') && isDeviceOwner && (
           <SettingsInfoBox variant="info">
             <Text style={styles.infoText}>
-              ℹ️ Screen pinning enabled: Only 5-tap gesture + PIN code allows exit
+              ℹ️ 已启用屏幕固定：只有 5 次点击手势 + PIN 码允许退出
             </Text>
           </SettingsInfoBox>
         )}
@@ -156,7 +156,7 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
         {kioskEnabled && displayMode === 'external_app' && !isDeviceOwner && (
           <SettingsInfoBox variant="error">
             <Text style={styles.infoText}>
-              ⚠️ Device Owner required: Lock Mode will not work in External App mode without Device Owner privileges.
+              ⚠️ 需要设备所有者权限：在没有设备所有者权限的情况下，外部应用模式下的锁定模式将无法工作。
             </Text>
           </SettingsInfoBox>
         )}
@@ -164,7 +164,7 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
         {kioskEnabled && displayMode === 'external_app' && isDeviceOwner && (
           <SettingsInfoBox variant="info">
             <Text style={styles.infoText}>
-              ℹ️ Lock Mode enabled: Only 5-tap anywhere on screen + PIN code allows exit from external app
+              ℹ️ 锁定模式已启用：只有在屏幕上任意位置点击 5 次 + PIN 码允许退出外部应用
             </Text>
           </SettingsInfoBox>
         )}
@@ -182,7 +182,7 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
             <View style={styles.divider} />
             <SettingsSwitch
               label="📡 允许通知（NFC）"
-              hint="Enable notification dispatch to allow NFC tag reading in external apps. ⚠️ Note: Android will show the Home button (non-functional) and make the notification panel accessible when this is enabled."
+              hint="启用通知调度以允许在外部应用中读取 NFC 标签。⚠️ 注意：启用后 Android 会显示主页按钮（无效）并可访问通知面板。"
               value={allowNotifications}
               onValueChange={onAllowNotificationsChange}
             />
@@ -293,8 +293,8 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
             <SettingsSwitch
               label="👁️ 显示按钮"
               hint={displayMode === 'external_app' 
-                ? "Make the return button visible. When hidden, it's still active but invisible." 
-                : "Show a visual button indicator"}
+                ? "显示返回按钮。隐藏时，它仍然有效但不可见。" 
+                : "显示视觉按钮指示器"}
               value={overlayButtonVisible}
               onValueChange={onOverlayButtonVisibleChange}
             />
@@ -306,8 +306,8 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
           <SettingsSwitch
             label="🔊 音量键替代方案"
             hint={displayMode === 'external_app'
-              ? 'Allow pressing Volume Up/Down multiple times to access settings (disabled by default in App mode to avoid accidental triggers during normal volume adjustment)'
-              : 'Also allow pressing Volume Up/Down button multiple times to access settings'}
+              ? '允许多次按音量键访问设置（默认在应用模式下禁用，以避免正常音量调整时意外触发）'
+              : '也允许多次按音量键访问设置'}
             value={volumeUp5TapEnabled}
             onValueChange={onVolumeUp5TapEnabledChange}
           />
@@ -349,7 +349,7 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
         {kioskEnabled && isDeviceOwner && (
           <SettingsInfoBox variant="success">
             <Text style={styles.infoText}>
-              ✅ Lock Mode + Device Owner active. Maximum security enabled.
+              ✅ 锁定模式 + 设备所有者已激活。已启用最大安全性。
             </Text>
           </SettingsInfoBox>
         )}
@@ -374,20 +374,20 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
                 options={[
                   {
                     value: 'blacklist',
-                    label: 'Blacklist',
+                    label: '黑名单',
                     icon: 'close-circle',
                   },
                   {
                     value: 'whitelist',
-                    label: 'Whitelist',
+                    label: '白名单',
                     icon: 'check-circle-outline',
                   },
                 ]}
                 value={urlFilterMode}
                 onValueChange={onUrlFilterModeChange}
                 hint={urlFilterMode === 'blacklist' 
-                  ? 'URLs matching these patterns will be blocked. The main kiosk URL is always allowed, even if it matches a pattern.' 
-                  : 'Only the main kiosk URL and URLs matching these patterns will be allowed. With an empty list, only your kiosk URL can be accessed.'}
+                  ? '与这些模式匹配的网址将被阻止。主要自助终端网址始终被允许，即使匹配模式。' 
+                  : '仅允许主要自助终端网址和与这些模式匹配的网址。留空列表时，只能访问您的主自助终端网址。'}
               />
               
               <View style={styles.divider} />
@@ -406,17 +406,17 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
               
               <SettingsInfoBox variant="info">
                 <Text style={styles.infoText}>
-                  {'ℹ️ Use * as wildcard to match any characters.\n\n'}
-                  {'Examples:\n'}
-                  {'• *facebook.com* → matches any URL containing facebook.com\n'}
-                  {'• */privacy* → matches any path containing /privacy\n'}
-                  {'• https://example.com/admin/* → matches all admin pages'}
+                  {'ℹ️ 使用 * 作为通配符匹配任意字符。\n\n'}
+                  {'示例：\n'}
+                  {'• *facebook.com* → 匹配任何包含 facebook.com 的网址\n'}
+                  {'• */privacy* → 匹配任何包含 /privacy 的路径\n'}
+                  {'• https://example.com/admin/* → 匹配所有管理员页面'}
                 </Text>
               </SettingsInfoBox>
               
               <SettingsInfoBox variant="success">
                 <Text style={styles.infoText}>
-                  {'✅ The main kiosk URL configured in General settings is always allowed, even if it matches a blacklist pattern. You don\'t need to add it to the whitelist.'}
+                  {'✅ 在"常规"设置中配置的主要自助终端网址始终被允许，即使它匹配黑名单模式。您无需将其添加到白名单中。'}
                 </Text>
               </SettingsInfoBox>
               
@@ -453,21 +453,21 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
               options={[
                 {
                   value: 'test',
-                  label: 'Test Mode',
+                  label: '测试模式',
                   icon: 'test-tube',
-                  hint: 'Back button works normally (for testing)',
+                  hint: '返回键正常工作（用于测试）',
                 },
                 {
                   value: 'immediate',
                   label: '立即返回',
                   icon: 'flash',
-                  hint: 'Relaunch app instantly',
+                  hint: '立即重新启动应用',
                 },
                 {
                   value: 'timer',
                   label: '延迟返回',
                   icon: 'timer',
-                  hint: 'Wait X seconds then relaunch app automatically',
+                  hint: '等待 X 秒后自动重新启动应用',
                 },
               ]}
               value={backButtonMode}
@@ -495,13 +495,13 @@ const SecurityTab: React.FC<SecurityTabProps> = ({
       
       {/* Return Mechanism Info - Always visible */}
       <SettingsSection variant="info">
-        <Text style={styles.infoTitle}>ℹ️ Return to Settings</Text>
+        <Text style={styles.infoTitle}>ℹ️ 返回设置</Text>
         <Text style={styles.infoText}>
           {displayMode === 'external_app' && returnMode === 'button'
-            ? `• Tap the return button (${returnButtonPosition}) ${returnTapCount || '5'} times${overlayButtonVisible ? '' : ' (invisible)'}`
-            : `• Tap ${returnTapCount || '5'} times anywhere on the screen within ${returnTapTimeout ? `${(parseInt(returnTapTimeout, 10) / 1000).toFixed(1)}s` : '1.5s'}${overlayButtonVisible ? ' (visual indicator visible)' : ''}`}
-          {displayMode === 'external_app' && '\n• Or use the recent apps selector'}
-          {(displayMode === 'webview' || displayMode === 'media_player') && volumeUp5TapEnabled && `\n• Or press Volume Up/Down ${returnTapCount || '5'} times rapidly`}
+            ? `• 在 ${returnButtonPosition} 处点击返回按钮 ${returnTapCount || '5'} 次${overlayButtonVisible ? '' : '（不可见）'}`
+            : `• 在 ${returnTapTimeout ? `${(parseInt(returnTapTimeout, 10) / 1000).toFixed(1)}` : '1.5'} 秒内在屏幕任意位置点击 ${returnTapCount || '5'} 次${overlayButtonVisible ? '（可见视觉指示器）' : ''}`}
+          {displayMode === 'external_app' && '\n• 或使用最近应用选择器'}
+          {(displayMode === 'webview' || displayMode === 'media_player') && volumeUp5TapEnabled && `\n• 或快速按音量键 ${returnTapCount || '5'} 次`}
         </Text>
       </SettingsSection>
     </View>

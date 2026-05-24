@@ -312,8 +312,8 @@ export const MqttSettingsSection: React.FC<MqttSettingsSectionProps> = ({
   };
 
   const getStatusText = () => {
-    if (isLoading) return 'Connecting...';
-    return isConnected ? 'Connected' : 'Disconnected';
+    if (isLoading) return '连接中...';
+    return isConnected ? '已连接' : '已断开';
   };
 
   return (
@@ -356,7 +356,7 @@ export const MqttSettingsSection: React.FC<MqttSettingsSectionProps> = ({
                     onPress={handleDisconnect}
                   >
                     <Icon name="lan-disconnect" size={16} color="#FFF" />
-                    <Text style={styles.connectButtonText}>Disconnect</Text>
+                    <Text style={styles.connectButtonText}>断开连接</Text>
                   </TouchableOpacity>
                 ) : brokerUrl.trim().length > 0 ? (
                   <TouchableOpacity
@@ -364,10 +364,10 @@ export const MqttSettingsSection: React.FC<MqttSettingsSectionProps> = ({
                     onPress={handleConnect}
                   >
                     <Icon name="lan-connect" size={16} color="#FFF" />
-                    <Text style={styles.connectButtonText}>Connect</Text>
+                    <Text style={styles.connectButtonText}>连接</Text>
                   </TouchableOpacity>
                 ) : (
-                  <Text style={styles.connectHint}>Enter broker URL to connect</Text>
+                  <Text style={styles.connectHint}>输入代理 URL 以连接</Text>
                 )}
               </View>
             )}
@@ -438,7 +438,7 @@ export const MqttSettingsSection: React.FC<MqttSettingsSectionProps> = ({
 
           {/* Base Topic */}
           <SettingsInput
-            label="Base Topic"
+            label="基础主题"
             value={baseTopic}
             onChangeText={handleBaseTopicChange}
             placeholder="freekiosk"
@@ -489,7 +489,7 @@ export const MqttSettingsSection: React.FC<MqttSettingsSectionProps> = ({
           <View style={styles.hintContainer}>
             <Icon name="home-assistant" size={20} color="#41BDF5" />
             <Text style={styles.hintText}>
-              Devices auto-discover in Home Assistant via MQTT Discovery. Ensure your HA MQTT integration is configured.
+              设备通过 MQTT 发现自动在 Home Assistant 中被发现。请确保您的 HA MQTT 集成已配置。
             </Text>
           </View>
         </>

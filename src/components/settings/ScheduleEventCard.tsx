@@ -68,13 +68,13 @@ const ScheduleEventCard: React.FC<ScheduleEventCardProps> = ({
               style={styles.typeIcon}
             />
             <Text style={[styles.name, !event.enabled && styles.textDisabled]} numberOfLines={1}>
-              {event.name || 'Unnamed Event'}
+              {event.name || '未命名事件'}
             </Text>
           </View>
           {isActive && event.enabled && (
             <View style={styles.activeBadge}>
               <Icon name="check-circle" size={12} color={Colors.success} />
-              <Text style={styles.activeBadgeText}>Active</Text>
+              <Text style={styles.activeBadgeText}>激活</Text>
             </View>
           )}
         </View>
